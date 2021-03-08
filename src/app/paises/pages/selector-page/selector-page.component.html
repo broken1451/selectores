@@ -1,0 +1,62 @@
+<h1 class="mt-5">Selectores aninados</h1>
+<hr />
+
+<form [formGroup]="form" autocomplete="off" (ngSubmit)='guardar()' class="mb-4">
+<!-- Region -->
+  <div class="row mb-4">
+    <div class="col">
+      <label for="" class="form-label">Continente:</label>
+      <select formControlName="region"  class="form-control">
+        <option value="" disabled> -- Seleccione Continente -- </option>
+        <option *ngFor="let region of regions" [value]="region | lowercase"> {{region}}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Paises -->
+  <div class="row mb-4" *ngIf="paises.length !==0">
+    <div class="col">
+      <label for="" class="form-label">Paises:</label>
+      <select formControlName="pais"  class="form-control">
+        <option value="" disabled> -- Seleccione Pais -- </option>
+        <option *ngFor="let pais of paises" [value]="pais.alpha3Code"> {{pais.name}}</option>
+      </select>
+    </div>
+  </div>
+
+
+    <!-- Fronteras -->
+    <div class="row mb-4" *ngIf="fronteras.length > 0">
+        <div class="col">
+          <label for="" class="form-label">Fronteras:</label>
+          <select formControlName="frontera"  class="form-control">
+            <option value="" disabled> -- Seleccione Pais Fronterizo-- </option>
+            <option *ngFor="let forntera of fronteras" [value]="forntera.alpha3Code"> {{forntera.name}}</option>
+          </select>
+        </div>
+      </div>
+
+    <div class="row" *ngIf="cargando">
+        <div class="col">
+            <div class="alert alert-primary">
+                Cargando...
+            </div>
+        </div>
+    </div>
+
+  <div class="row mt-2">
+      <div class="col">
+          <button type="submit" class="btn btn-primary float-end btn-block w-100">Seleccionar</button>
+      </div>
+  </div>
+
+</form>
+
+
+<h3>Formulario</h3>
+<pre>
+    Valid: {{form.valid | json}}
+</pre>
+<pre>
+  {{form.value | json}}
+</pre>
